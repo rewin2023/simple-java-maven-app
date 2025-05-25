@@ -1,15 +1,16 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3-alpine' 
-            args '-v /root/.m2:/root/.m2' 
-        }
-    }
+    agent any
     stages {
-        stage('Build') { 
+        stage('Checkout') {
             steps {
-                sh 'mvn -B -DskipTests clean package' 
+                git url: 'git@github.com:rewin2023/simple-java-maven-app.git', credentialsId: 'github-key', branch: 'master'
+            }
+        }
+        stage('Show files') {
+            steps {
+                sh 'ls -al'
             }
         }
     }
 }
+
