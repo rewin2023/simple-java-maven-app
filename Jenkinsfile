@@ -11,6 +11,11 @@ pipeline {
                 sh 'ls -al'
             }
         }
+        stage('Build') { 
+            steps {
+                sh 'mvn -B -DskipTests clean package' 
+            }
+        }
     }
 }
 
